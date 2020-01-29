@@ -1,14 +1,17 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 
 const Form = (props) => {
 
+    //create state to hold individual member, to eventaully pass to members array/list in App.js
     const [member, setMember] = useState({
         name: '',
         email: '',
         role: ''
     });
 
+
+    //handle any changes made to inputs in the form
     const handleChanges = event => {
         console.log("member: ", member);
         setMember({
@@ -18,11 +21,20 @@ const Form = (props) => {
        
     };
 
+    //when form is submitted
     const submitForm = event => {
         event.preventDefault();
         props.addNewMember(member);
         setMember({name:"", email: "", role: "" })
+        
     }
+
+
+    //edit members stretch
+    useEffect(() => {
+        console.log("useEffect ran. memberToEdit: ", props.memberToEdit)
+        
+    },[props.memberToEdit]);
 
 
     return (
